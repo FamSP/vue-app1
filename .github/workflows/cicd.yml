@@ -18,17 +18,17 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Login to GHCR
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u FamSp --password-stdin
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u famsp --password-stdin
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/FamSp/vue-app1:latest .
+        run: docker build -t ghcr.io/famsp/vue-app1:latest .
 
       - name: Push Docker Image
-        run: docker push ghcr.io/FamSp/vue-app1:latest
+        run: docker push ghcr.io/famsp/vue-app1:latest
 
       - name: Extract Vue build from container
         run: |
-          CONTAINER_ID=$(docker create ghcr.io/FamSp/vue-app1:latest)
+          CONTAINER_ID=$(docker create ghcr.io/famsp/vue-app1:latest)
           docker cp $CONTAINER_ID:/usr/share/nginx/html ./dist
           docker rm -v $CONTAINER_ID
 
